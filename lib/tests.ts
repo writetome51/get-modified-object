@@ -1,13 +1,13 @@
-import { modifyObject } from './index';
+import { getModifiedObject } from './index';
 
 // Make sure existing properties can be overwritten and new properties can be added.
 
 let objToModify: any = {prop1: 10, prop2: 20, prop3: 30};
 let changes: any = {prop1: 100, prop2: 200, prop10: 1000};
-modifyObject(objToModify, changes);
+let newObj: any = getModifiedObject(objToModify, changes);
 
-if (objToModify.prop1 === 100 && objToModify.prop2 === 200 &&
-	objToModify.prop3 === 30 && objToModify.prop10 === 1000) console.log('test 1 passed');
+if (newObj.prop1 === 100 && newObj.prop2 === 200 &&
+	newObj.prop3 === 30 && newObj.prop10 === 1000) console.log('test 1 passed');
 else console.log('test 1 FAILED');
 
 
@@ -25,11 +25,11 @@ changes = {
 		return this.prop1 + this.prop3;
 	}
 };
-modifyObject(objToModify, changes);
+newObj = getModifiedObject(objToModify, changes);
 
-if (objToModify.prop1 === 100 && objToModify.prop2 === 200 &&
-	objToModify.prop3 === 30 && objToModify.prop10 === 1000 &&
-	objToModify.prop4() === 300 && objToModify.prop5() === 130) console.log('test 2 passed');
+if (newObj.prop1 === 100 && newObj.prop2 === 200 &&
+	newObj.prop3 === 30 && newObj.prop10 === 1000 &&
+	newObj.prop4() === 300 && newObj.prop5() === 130) console.log('test 2 passed');
 else console.log('test 2 FAILED');
 
 
@@ -61,7 +61,7 @@ changes = {
 	}
 };
 
-modifyObject(objToModify, changes);
+newObj = getModifiedObject(objToModify, changes);
 
-if (objToModify.getSumOfAll() === 10) console.log('test 3 passed');
+if (newObj.getSumOfAll() === 10) console.log('test 3 passed');
 else console.log('test 3 FAILED');
