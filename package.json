@@ -1,7 +1,7 @@
 {
-  "name": "@writetome51/get-modified-object",
-  "version": "0.0.1",
-  "description": "Function merges one object into another and returns new, modified object",
+  "name": "@writetome51/get-object-copy-modified",
+  "version": "1.0.0",
+  "description": "Makes a copy of object, merges changes into it and returns the copy",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,11 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/writetome51/get-modified-object.git"
+    "url": "git+https://github.com/writetome51/get-object-copy-modified.git"
   },
   "keywords": [
     "object",
     "objects",
+    "copy",
     "manipulation",
     "modify",
     "merge"
@@ -21,11 +22,11 @@
   "author": "Steve Thompson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/writetome51/get-modified-object/issues"
+    "url": "https://github.com/writetome51/get-object-copy-modified/issues"
   },
-  "homepage": "https://github.com/writetome51/get-modified-object#readme",
+  "homepage": "https://github.com/writetome51/get-object-copy-modified#readme",
   "dependencies": {
-    "copy-object": "^1.0.0",
+    "@writetome51/get-object-copy": "^0.0.1",
     "@writetome51/modify-object": "^1.0.0"
   }
 }

@@ -17,7 +17,7 @@ var index_1 = require("./index");
 // Make sure existing properties can be overwritten and new properties can be added.
 var objToModify = { prop1: 10, prop2: 20, prop3: 30 };
 var changes = { prop1: 100, prop2: 200, prop10: 1000 };
-var newObj = index_1.getModifiedObject(objToModify, changes);
+var newObj = index_1.getObjectCopyModified(objToModify, changes);
 if (newObj.prop1 === 100 && newObj.prop2 === 200 &&
     newObj.prop3 === 30 && newObj.prop10 === 1000)
     console.log('test 1 passed');
@@ -36,7 +36,7 @@ changes = {
         return this.prop1 + this.prop3;
     }
 };
-newObj = index_1.getModifiedObject(objToModify, changes);
+newObj = index_1.getObjectCopyModified(objToModify, changes);
 if (newObj.prop1 === 100 && newObj.prop2 === 200 &&
     newObj.prop3 === 30 && newObj.prop10 === 1000 &&
     newObj.prop4() === 300 && newObj.prop5() === 130)
@@ -78,8 +78,16 @@ changes = {
         return this.prop1 + this.prop2 + this.prop3 + this.prop4;
     }
 };
-newObj = index_1.getModifiedObject(objToModify, changes);
+newObj = index_1.getObjectCopyModified(objToModify, changes);
 if (newObj.getSumOfAll() === 10)
     console.log('test 3 passed');
 else
     console.log('test 3 FAILED');
+if (newObj instanceof TestSubSubclass)
+    console.log('test 4 passed');
+else
+    console.log('test 4 FAILED');
+if (newObj instanceof TestClass)
+    console.log('test 5 passed');
+else
+    console.log('test 5 FAILED');

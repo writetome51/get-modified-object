@@ -1,13 +1,14 @@
-# getModifiedObject(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changes<br>): Object
-Returns new object consisting of `object` with `changes` merged into it.  
-Neither of the two arguments get modified.
+# getObjectCopyModified(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changes<br>): object
+
+Makes a copy of `object`, merges `changes` into it and returns the copy.  
+Neither of the two arguments get modified. Prototype chain stays intact.
 
 
 ## Examples
 ```ts
 let obj = {prop1: 10, prop2: 20, prop3: 30};
 let changes = {prop1: 100, prop2: 200, prop4: 1000};
-getModifiedObject(obj, changes);
+getObjectCopyModified(obj, changes);
 // -->  {prop1: 100, prop2: 200, prop3: 30, prop4: 1000}
 
 obj = {prop1: 10, prop2: 20};
@@ -17,7 +18,7 @@ changes = {
         return this.prop1 + this.prop2;
     }
 };
-let newObj = getModifiedObject(obj, changes);
+let newObj = getObjectCopyModified(obj, changes);
 
 console.log(newObj.prop3());
 // console: '120'
@@ -26,13 +27,14 @@ console.log(newObj.prop3());
 ## Installation
 
 ```bash
-npm i  @writetome51/get-modified-object
+npm i  @writetome51/get-object-copy-modified
 ```
 
 ## Loading
 ```ts
 // If using TypeScript:
-import {getModifiedObject} from '@writetome51/get-modified-object';
+import {getObjectCopyModified} from '@writetome51/get-object-copy-modified';
 // If using ES5 JavaScript:
-var getModifiedObject = require('@writetome51/get-modified-object').getModifiedObject;
+var getObjectCopyModified = 
+    require('@writetome51/get-object-copy-modified').getObjectCopyModified;
 ```
