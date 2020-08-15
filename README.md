@@ -5,7 +5,7 @@ Neither of the two arguments get modified. Prototype chain stays intact.
 
 
 ## Examples
-```ts
+```js
 let obj = {prop1: 10, prop2: 20, prop3: 30};
 let changes = {prop1: 100, prop2: 200, prop4: 1000};
 getObjectModified(obj, changes);
@@ -31,7 +31,6 @@ npm i  @writetome51/get-object-modified
 ```
 
 ## Loading
-```ts
-// If using TypeScript:
+```js
 import {getObjectModified} from '@writetome51/get-object-modified';
 ```
