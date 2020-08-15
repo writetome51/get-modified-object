@@ -1,1 +1,1 @@
-export declare function getObjectCopyModified(object: any, changes: any): any;
+export declare function getObjectModified(object: object, changes: object): object;

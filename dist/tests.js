@@ -1,23 +1,8 @@
-"use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var index_1 = require("./index");
+import { getObjectModified } from './index.js';
 // Make sure existing properties can be overwritten and new properties can be added.
-var objToModify = { prop1: 10, prop2: 20, prop3: 30 };
-var changes = { prop1: 100, prop2: 200, prop10: 1000 };
-var newObj = index_1.getObjectCopyModified(objToModify, changes);
+let objToModify = { prop1: 10, prop2: 20, prop3: 30 };
+let changes = { prop1: 100, prop2: 200, prop10: 1000 };
+let newObj = getObjectModified(objToModify, changes);
 if (newObj.prop1 === 100 && newObj.prop2 === 200 &&
     newObj.prop3 === 30 && newObj.prop10 === 1000)
     console.log('test 1 passed');
@@ -36,7 +21,7 @@ changes = {
         return this.prop1 + this.prop3;
     }
 };
-newObj = index_1.getObjectCopyModified(objToModify, changes);
+newObj = getObjectModified(objToModify, changes);
 if (newObj.prop1 === 100 && newObj.prop2 === 200 &&
     newObj.prop3 === 30 && newObj.prop10 === 1000 &&
     newObj.prop4() === 300 && newObj.prop5() === 130)
@@ -44,41 +29,31 @@ if (newObj.prop1 === 100 && newObj.prop2 === 200 &&
 else
     console.log('test 2 FAILED');
 // Make sure inherited properties can be overwritten and also be accessed in new methods.
-var TestClass = /** @class */ (function () {
-    function TestClass() {
+export class TestClass {
+    constructor() {
         this.prop1 = 1;
         this.prop2 = 2;
     }
-    return TestClass;
-}());
-exports.TestClass = TestClass;
-var TestSubclass = /** @class */ (function (_super) {
-    __extends(TestSubclass, _super);
-    function TestSubclass() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.prop3 = _this.prop1 + _this.prop2; // 3
-        return _this;
+}
+export class TestSubclass extends TestClass {
+    constructor() {
+        super(...arguments);
+        this.prop3 = this.prop1 + this.prop2; // 3
     }
-    return TestSubclass;
-}(TestClass));
-exports.TestSubclass = TestSubclass;
-var TestSubSubclass = /** @class */ (function (_super) {
-    __extends(TestSubSubclass, _super);
-    function TestSubSubclass() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.prop4 = _this.prop1 + _this.prop3; // 4
-        return _this;
+}
+export class TestSubSubclass extends TestSubclass {
+    constructor() {
+        super(...arguments);
+        this.prop4 = this.prop1 + this.prop3; // 4
     }
-    return TestSubSubclass;
-}(TestSubclass));
-exports.TestSubSubclass = TestSubSubclass;
+}
 objToModify = new TestSubSubclass();
 changes = {
     getSumOfAll: function () {
         return this.prop1 + this.prop2 + this.prop3 + this.prop4;
     }
 };
-newObj = index_1.getObjectCopyModified(objToModify, changes);
+newObj = getObjectModified(objToModify, changes);
 if (newObj.getSumOfAll() === 10)
     console.log('test 3 passed');
 else
@@ -91,3 +66,10 @@ if (newObj instanceof TestClass)
     console.log('test 5 passed');
 else
     console.log('test 5 FAILED');
+//try array:
+let arr = [0, 1];
+arr = getObjectModified(arr, { 2: 2, 3: 3 });
+console.log(arr); // Array { '0': 0, '1': 1, '2': 2, '3': 3 }
+arr = [0, 1];
+arr = getObjectModified(arr, [2, 3, 4]);
+console.log(arr); // Array { '0': 2, '1': 3, '2': 4 }
