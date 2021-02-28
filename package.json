@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/writetome51/get-object-modified#readme",
   "dependencies": {
-    "@writetome51/get-object-copy": "^1.0.0",
-    "@writetome51/modify-object": "^2.0.0"
+    "@writetome51/get-object-copy": "^2.0.0",
+    "@writetome51/modify-object": ">=2.0.0"
   }
 }

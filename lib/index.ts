@@ -4,7 +4,7 @@ import { getObjectCopy } from '@writetome51/get-object-copy';
 // Makes a copy of `object`, merges `changes` into it and returns the copy.
 // Neither of the two arguments get modified.
 
-export function getObjectModified(object:object, changes:object): any {
+export function getObjectModified(object: object, changes: object): object {
 	let copy = getObjectCopy(object);
 
 	modifyObject(copy, changes);
